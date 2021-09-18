@@ -16,9 +16,7 @@ public class ConnectionUtil {
 			e.printStackTrace();
 			System.out.println("problem occurred locating driver");
 		}
-		//These variables holding my DB credentials are hidden in my Environment Variables
-		//Run -> Run Configurations -> Environment -> Then create key/value pairs for these credentials
-		//You may have to stretch out the window to see the "environment" option
+
 		String url = System.getenv("URL");
 		String username = System.getenv("USERNAME");
 		String password = System.getenv("PASSWORD");
