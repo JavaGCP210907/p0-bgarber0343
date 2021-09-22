@@ -1,6 +1,7 @@
 package com.revature.models;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 
 public class Department {
 	
@@ -25,8 +26,9 @@ public class Department {
 
 	@Override
 	public String toString() {
-		return "Department [department_id=" + department_id + ", department_name=" + department_name
-				+ ", department_sales=" + department_sales + "]";
+		DecimalFormat df = new DecimalFormat("#,##0.00");
+		return "[ID: " + department_id + "] [Name: " + department_name
+				+ "] [Sales: $" + df.format(department_sales) + "]";
 	}
 
 

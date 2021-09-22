@@ -1,8 +1,13 @@
 package com.revature.models;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.List;
 import java.util.Scanner;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.revature.dao.DepartmentDao;
 import com.revature.dao.ProductDao;
@@ -11,6 +16,7 @@ public class Menu {
 	
 	ProductDao pDao = new ProductDao();
 	DepartmentDao dDao = new DepartmentDao();
+	Logger log = LogManager.getLogger(Menu.class);
 	
 	public void displayMenu() {
 		
@@ -54,6 +60,8 @@ public class Menu {
 				Product prod = pDao.getProductsByProductId(idInput);
 				System.out.println(prod);
 				
+				log.info("USER RETRIEVED INFORMATION FOR PRODUCT WITH P_ID: " + idInput);
+				
 				break;
 				
 			} case "SHOW DEPARTMENT INVENTORY": {
@@ -69,6 +77,8 @@ public class Menu {
 					System.out.println(prod);
 				}
 				
+				log.info("USER RETRIVED INVENTORY FOR DEPARTMENT: " + idInput);
+				
 				break;
 				
 			} case "SHOW ALL INVENTORY": {
@@ -78,6 +88,8 @@ public class Menu {
 				for(Product prod : products) {
 					System.out.println(prod);
 				}
+				
+				log.info("USER RETRIEVED ALL INVENTORY INFORMATION");
 				
 				break;
 				
@@ -89,12 +101,17 @@ public class Menu {
 					System.out.println(dept);
 				}
 				
+				log.warn("USER RETRIEVED ALL DEPARTMENT INFORMATION");
+				
 				break;
 				
 			} case "SHOW TOTAL SALES": {
 				
 				BigDecimal sales = dDao.getTotalSales();
-				System.out.println(sales);
+				DecimalFormat df = new DecimalFormat("#,##0.00");
+				System.out.println("$" + df.format(sales));
+				
+				log.warn("USER RETRIEVED TOTAL SALES");
 				
 				break;
 				
@@ -109,6 +126,8 @@ public class Menu {
 				
 				pDao.updateStock(idInput, stockInput);
 				
+				log.info("USER UPDATED STOCK FOR PRODUCT WITH P_ID: " + idInput);
+				
 				break;
 				
 			} case "UPDATE SALES": {
@@ -121,6 +140,8 @@ public class Menu {
 				scan.nextLine();
 				
 				dDao.updateSales(idInput, salesInput);
+				
+				log.info("USER UPDATED SALES FOR DEPARTMENT: " + idInput);
 				
 				break;
 				
@@ -147,6 +168,8 @@ public class Menu {
 				
 				pDao.addProduct(prod);
 				
+				log.info("USER ADDED NEW PRODUCT WITH P_NAME: " + pName);
+				
 				break;
 				
 			} case "DELETE PRODUCT": {
@@ -157,6 +180,8 @@ public class Menu {
 				scan.nextLine();
 				
 				pDao.removeProduct(id);
+				
+				log.warn("USER DELETED PRODUCT WITH P_ID: " + id);
 				
 				break;
 				

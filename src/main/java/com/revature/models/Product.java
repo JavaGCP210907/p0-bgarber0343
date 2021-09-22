@@ -1,6 +1,7 @@
 package com.revature.models;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 
 public class Product {
 	
@@ -42,8 +43,9 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return "Product [product_id=" + product_id + ", product_name=" + product_name + ", product_description="
-				+ product_description + ", price=" + price + ", stock=" + stock + ", department_id=" + department_id
+		DecimalFormat df = new DecimalFormat("#,##0.00");
+		return "[ID: " + product_id + "] [Name: " + product_name + "] [Description: "
+				+ product_description + "] [Price: $" + df.format(price) + "] [Stock: " + stock + "] [Department ID: " + department_id
 				+ "]";
 	}
 
