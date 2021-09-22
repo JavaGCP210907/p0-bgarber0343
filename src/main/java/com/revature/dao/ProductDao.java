@@ -19,8 +19,10 @@ public class ProductDao implements ProductDaoInterface {
 		try(Connection conn = ConnectionUtil.getConnection()) {
 			
 			ResultSet rs = null;
+			
 			String sql = "select * from products";
 			Statement s = conn.createStatement();
+			
 			rs = s.executeQuery(sql);
 			
 			List<Product> productList = new ArrayList<>();
@@ -56,8 +58,10 @@ public class ProductDao implements ProductDaoInterface {
 		try(Connection conn = ConnectionUtil.getConnection()) {
 			
 			ResultSet rs = null;
+			
 			String sql = "select * from products where department_id = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
+			
 			ps.setInt(1, id);
 			rs = ps.executeQuery();
 			
@@ -95,9 +99,12 @@ public class ProductDao implements ProductDaoInterface {
 		try(Connection conn = ConnectionUtil.getConnection()) {
 			
 			ResultSet rs = null;
+			
 			String sql = "select * from products where product_id = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
+			
 			ps.setInt(1, id);
+			
 			rs = ps.executeQuery();
 			
 			rs.next();
@@ -171,6 +178,29 @@ public class ProductDao implements ProductDaoInterface {
 			e.printStackTrace();
 		}
 		
+	}
+
+	@Override
+	public void updateStock(int id, int newStock) {
+		
+		try(Connection conn = ConnectionUtil.getConnection()) {
+			
+			String sql = "update products set stock = ? where product_id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, newStock);
+			ps.setInt(2, id);
+			
+			ps.executeUpdate();
+			
+			System.out.println("Update successful!");
+			
+		}
+		catch (SQLException e) {
+			
+			System.out.println("There was an error with your database!");
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -11,6 +11,8 @@ public interface ProductDaoInterface {
 	
 	public Product getProductsByProductId(int id);
 	
+	public void updateStock(int id, int newStock);
+	
 	public void addProduct(Product product);
 	
 	public void removeProduct(int id);

@@ -20,26 +20,31 @@ public class Menu {
 		System.out.println("////////////////////////////////////////////////////////");
 		System.out.println("//Welcome to your Inventory and Sales Tracking System!//");
 		System.out.println("////////////////////////////////////////////////////////");
+		System.out.println();
 		
 		while(showMenu) {
 			
-			System.out.println("/////////////////////");
-			System.out.println("//SELECT AN OPTION://");
-			System.out.println("/////////////////////");
-			System.out.println("Show product");
-			System.out.println("Show department inventory");
-			System.out.println("Show all inventory");
-			System.out.println("Show all departments");
-			System.out.println("Add new product");
-			System.out.println("Delete product");
-			System.out.println("Help");
-			System.out.println("Exit");
+			System.out.println("/////////////////////////////");
+			System.out.println("//    SELECT AN OPTION     //");
+			System.out.println("/////////////////////////////");
+			System.out.println("//Show product             //");
+			System.out.println("//Show department inventory//");
+			System.out.println("//Show all inventory       //");
+			System.out.println("//Show all departments     //");
+			System.out.println("//Show total sales         //");
+			System.out.println("//Update stock             //");
+			System.out.println("//Update sales             //");
+			System.out.println("//Add new product          //");
+			System.out.println("//Delete product           //");
+			System.out.println("//Help                     //");
+			System.out.println("//Exit                     //");
+			System.out.println("/////////////////////////////");
 			
 			String input = scan.nextLine();
 			
-			switch(input) {
+			switch(input.toUpperCase()) {
 			
-			case "Show product": {
+			case "SHOW PRODUCT": {
 				
 				System.out.println("Which product would you like to display?");
 				
@@ -51,7 +56,7 @@ public class Menu {
 				
 				break;
 				
-			} case "Show department inventory": {
+			} case "SHOW DEPARTMENT INVENTORY": {
 				
 				System.out.println("Which department would you like to display?");
 				
@@ -66,7 +71,7 @@ public class Menu {
 				
 				break;
 				
-			} case "Show all inventory": {
+			} case "SHOW ALL INVENTORY": {
 				
 				List<Product> products = pDao.getProducts();
 				
@@ -76,7 +81,7 @@ public class Menu {
 				
 				break;
 				
-			} case "Show all departments": {
+			} case "SHOW ALL DEPARTMENTS": {
 				
 				List<Department> departments = dDao.getDepartments(); 
 				
@@ -86,7 +91,42 @@ public class Menu {
 				
 				break;
 				
-			} case "Add new product": {
+			} case "SHOW TOTAL SALES": {
+				
+				BigDecimal sales = dDao.getTotalSales();
+				System.out.println(sales);
+				
+				break;
+				
+			} case "UPDATE STOCK": {
+				
+				System.out.println("Enter the ID of the item you wish to update");
+				int idInput = scan.nextInt();
+				
+				System.out.println("Enter the new total stock for the item");
+				int stockInput = scan.nextInt();
+				scan.nextLine();
+				
+				pDao.updateStock(idInput, stockInput);
+				
+				break;
+				
+			} case "UPDATE SALES": {
+				
+				System.out.println("Enter the ID of the department you wish to update");
+				int idInput = scan.nextInt();
+				
+				System.out.println("Enter the new sales for the department");
+				BigDecimal salesInput = scan.nextBigDecimal();
+				scan.nextLine();
+				
+				dDao.updateSales(idInput, salesInput);
+				
+				break;
+				
+			}
+			
+			case "ADD NEW PRODUCT": {
 				
 				System.out.println("Enter product name");
 				String pName = scan.nextLine();
@@ -109,7 +149,7 @@ public class Menu {
 				
 				break;
 				
-			} case "Delete product": {
+			} case "DELETE PRODUCT": {
 				
 				System.out.println("Enter the id of the product you want to delete");
 				
@@ -120,17 +160,23 @@ public class Menu {
 				
 				break;
 				
-			} case "Help": {
+			} case "HELP": {
+				
 				System.out.println("Coming soon!");
+				
 				break;
 				
-			} case "Exit": {
+			} case "EXIT": {
+				
 				showMenu = false;
 				System.out.println("Thank you for using the Inventory and Sales Tracking System!");
+				
 				break;
 				
 			} default: {
+				
 				System.out.println("Invalid input! Try again or select Help for more information.");
+				
 				break;
 				
 			}
