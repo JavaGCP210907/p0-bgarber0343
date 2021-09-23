@@ -20,7 +20,7 @@ public class ProductDao implements ProductDaoInterface {
 			
 			ResultSet rs = null;
 			
-			String sql = "select * from products";
+			String sql = "select * from products order by(product_id)";
 			Statement s = conn.createStatement();
 			
 			rs = s.executeQuery(sql);
@@ -59,7 +59,7 @@ public class ProductDao implements ProductDaoInterface {
 			
 			ResultSet rs = null;
 			
-			String sql = "select * from products where department_id = ?";
+			String sql = "select * from products where department_id = ? order by(product_id)";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			
 			ps.setInt(1, id);

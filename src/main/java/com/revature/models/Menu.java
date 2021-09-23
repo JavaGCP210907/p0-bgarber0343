@@ -42,7 +42,6 @@ public class Menu {
 			System.out.println("//Update sales             //");
 			System.out.println("//Add new product          //");
 			System.out.println("//Delete product           //");
-			System.out.println("//Help                     //");
 			System.out.println("//Exit                     //");
 			System.out.println("/////////////////////////////");
 			
@@ -52,7 +51,7 @@ public class Menu {
 			
 			case "SHOW PRODUCT": {
 				
-				System.out.println("Which product would you like to display?");
+				System.out.println("Enter the id of the product you would like to display.");
 				
 				int idInput = scan.nextInt();
 				scan.nextLine();
@@ -66,7 +65,7 @@ public class Menu {
 				
 			} case "SHOW DEPARTMENT INVENTORY": {
 				
-				System.out.println("Which department would you like to display?");
+				System.out.println("Enter the id of the department you would like to display.");
 				
 				int idInput = scan.nextInt();
 				scan.nextLine();
@@ -109,7 +108,7 @@ public class Menu {
 				
 				BigDecimal sales = dDao.getTotalSales();
 				DecimalFormat df = new DecimalFormat("#,##0.00");
-				System.out.println("$" + df.format(sales));
+				System.out.println("The total sales are: $" + df.format(sales));
 				
 				log.warn("USER RETRIEVED TOTAL SALES");
 				
@@ -145,9 +144,7 @@ public class Menu {
 				
 				break;
 				
-			}
-			
-			case "ADD NEW PRODUCT": {
+			} case "ADD NEW PRODUCT": {
 				
 				System.out.println("Enter product name");
 				String pName = scan.nextLine();
@@ -163,6 +160,7 @@ public class Menu {
 				
 				System.out.println("Enter product department id");
 				int depId = scan.nextInt();
+				scan.nextLine();
 				
 				Product prod = new Product(pName, pDesc, price, stock, depId);
 				
@@ -185,12 +183,6 @@ public class Menu {
 				
 				break;
 				
-			} case "HELP": {
-				
-				System.out.println("Coming soon!");
-				
-				break;
-				
 			} case "EXIT": {
 				
 				showMenu = false;
@@ -200,7 +192,7 @@ public class Menu {
 				
 			} default: {
 				
-				System.out.println("Invalid input! Try again or select Help for more information.");
+				System.out.println("Invalid input! Check your spelling and try again.");
 				
 				break;
 				

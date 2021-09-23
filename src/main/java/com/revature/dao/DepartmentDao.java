@@ -21,7 +21,7 @@ public class DepartmentDao implements DepartmentDaoInterface {
 		try(Connection conn = ConnectionUtil.getConnection()) {
 			
 			ResultSet rs = null;
-			String sql = "select * from departments";
+			String sql = "select * from departments order by(department_id)";
 			Statement s = conn.createStatement();
 			rs = s.executeQuery(sql);
 			
